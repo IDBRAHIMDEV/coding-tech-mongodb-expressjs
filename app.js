@@ -25,11 +25,13 @@ app.use(cookieParser());
 app.use(authJwt())
 app.use(express.static(path.join(__dirname, 'public')));
 
+const version = process.env.VERSION
 
-app.use('/products', productsRouter);
-app.use('/orders', ordersRouter);
-app.use('/categories', categoriesRouter);
-app.use('/users', usersRouter);
+app.use(`${version}/products`, productsRouter);
+app.use(`${version}/orders`, ordersRouter);
+app.use(`${version}/categories`, categoriesRouter);
+app.use(`${version}/users`, usersRouter);
+
 
 app.use(handlerError)
 

@@ -1,4 +1,5 @@
 const User = require('./../models/user')
+const Order = require('./../models/order')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
@@ -24,6 +25,43 @@ exports.index = async (req, res) => {
         
     }
 }
+
+
+exports.userOrders = async (req, res, next) => {
+
+    let { id } = req.params
+
+    try {
+        
+       const myOrders = await Order.find({user: id}, '-user')
+                                   .populate({ path: 'orderItems', populate: {
+                                    path: 'product', select: 'title description', populate: {
+                                        path: 'category',
+                                        select: 'label'
+                                    }
+                                   }})
+
+        // let total = 0
+
+        // myOrders.forEach(order => {
+        //     total += order.total
+        // })
+
+        const total = myOrders.reduce((cumul, order) => cumul + order.total, 0)
+
+
+       res.json({
+        total,
+        success: true,
+        orders: myOrders
+       })
+
+    } catch (error) {
+        res.status(500).json({ success: false });
+    }
+
+}
+
 
 exports.register = async (req, res) => {
 

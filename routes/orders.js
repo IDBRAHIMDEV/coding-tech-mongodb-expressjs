@@ -10,4 +10,5 @@ router.get('/', index);
 /* POST Product. */
 router.post('/', store);
 
+
 module.exports = router;
