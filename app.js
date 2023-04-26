@@ -9,9 +9,10 @@ require('dotenv').config()
 
 const authJwt = require('./middleware/auth-jwt')
 
-var productsRouter = require('./routes/products');
-var usersRouter = require('./routes/users');
-var categoriesRouter = require('./routes/categories');
+const productsRouter = require('./routes/products');
+const ordersRouter = require('./routes/orders');
+const usersRouter = require('./routes/users');
+const categoriesRouter = require('./routes/categories');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/products', productsRouter);
+app.use('/orders', ordersRouter);
 app.use('/categories', categoriesRouter);
 app.use('/users', usersRouter);
 

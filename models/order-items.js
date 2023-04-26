@@ -8,7 +8,8 @@ const schemaOrderItem = new Schema({
     quantity: {
         type: Number,
         required: true
-    }
+    },
+    price: Number
 })
 
 module.exports = model('OrderItem', schemaOrderItem)

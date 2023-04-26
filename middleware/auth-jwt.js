@@ -10,12 +10,13 @@ const authJwt = () => {
         algorithms: ['HS256']
     })
     .unless({ path: [
-        {url: /^\/images\/.*/ },
-        {url: "/users/login"},
-        {url: "/users/register"},
-        {
-            url: '/products', methods: ['GET']
-        }
+        {url: /(.*)/}
+        // {url: /^\/images\/.*/ },
+        // {url: "/users/login"},
+        // {url: "/users/register"},
+        // {
+        //     url: '/products', methods: ['GET']
+        // }
     ] })
 
 }
